@@ -1,0 +1,21 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo
+  become: yes
+  vars:
+    apache:
+      pack_name: apache2
+      service_name: apache2  
+      pack_state: latest
+      service_state: started  
+  tasks:
+    - name: install apache is installed 
+      apt:
+        name: "{{apache.pack_name}}"
+        state: "{{apache.pack_state}}"
+        update_cache : yes  
+    - name: check the apache service is running or not 
+      service:
+        name: "{{apache.service_name}}"
+        state: "{{apache.service_state}}"    

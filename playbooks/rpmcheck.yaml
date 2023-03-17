@@ -1,0 +1,26 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo 
+  become: yes
+  tasks:
+    - name: check rpm is installed 
+      package_facts: 
+        manager: "auto"
+    - name: show version
+      debug: var=ansible_facts.packages.rpm[0].version 
+
+    - name: check rpm is installed or not using service
+      apt:
+        name: rpm
+        state: install  
+            
+    - name: check rpm is installed or not 
+      command: dpkg-query -W --showformat '${Status}\n' rpm
+      register: rpmdetails
+    - debug: msg="{{rpmdetails.stdout}}" 
+      notify:
+        - install rpm
+  handlers:
+    - name: install rpm
+      command: 'sudo apt-get install rpm -y'   

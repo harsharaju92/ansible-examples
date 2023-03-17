@@ -1,0 +1,13 @@
+- hosts: dbusserver
+  become_user: root
+  remote_user: ubuntu
+  become_method: sudo
+  become: yes
+  tasks: 
+    - name: check MQ installed or not
+      shell: 'rpm -qa|grep MQSeries*|wc -l'
+      register: mqinstall
+    - name: display the out put
+      debug:
+        msg: "{{mqinstall.stdout}}"    
+

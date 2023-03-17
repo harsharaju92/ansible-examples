@@ -1,0 +1,17 @@
+- name: to check MQ install through shell command
+  hosts: all
+  gather_facts: false  
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo
+  become: yes  
+  tasks:
+   - name: checking using shell command
+     shell: rpm -qa|grep -v grep |grep MQSeries*
+     register: mqinstall
+   - name: check MQ is installed or not
+     fail:
+       msg: "MQ is not installed"
+     when:  mqinstall.rc !=0
+     
+

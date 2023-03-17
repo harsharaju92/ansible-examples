@@ -1,0 +1,22 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo
+  become: yes
+  tasks:
+   - name: delete apache  on the server
+     apt:
+       name: apache2
+       state: absent
+         #notify: delete apache    
+   - name: check version
+     apt:
+       name: nginx
+       state: latest
+     notify: restart nginx     
+          
+  handlers:       
+   - name: restart nginx
+     service:
+       name: nginx
+       state: started 

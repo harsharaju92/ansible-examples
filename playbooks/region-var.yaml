@@ -1,0 +1,12 @@
+- hosts: dbusserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo 
+  become: yes
+  tasks:
+    - name: the name of the region
+      shell: echo " {{region1}}"
+      register: reg_details
+    - name: selected region details from inventory
+      debug: 
+        msg:"region details is {{reg_details.stdout}}"     

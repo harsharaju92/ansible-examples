@@ -1,0 +1,24 @@
+- hosts: dbserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo 
+  become: yes
+  vars:
+    emp: kruthi
+  tasks:
+    - name: name of the student
+      shell: echo "{{emp}}"
+      register: echovar
+    - name: company name is 
+      shell: echo "{{companyname}}"
+      register: cmpdetails    
+    - name: display emp details    
+      debug:
+        msg: "emp name is {{echovar.stdout}} " 
+    - name: display register with var
+      debug:
+        var: echovar      
+    - name: display company name
+      debug:
+        msg: "company name is {{cmpdetails.stdout}}"      
+

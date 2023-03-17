@@ -1,0 +1,9 @@
+- name: install httpd on db servers
+  hosts: dbserver
+  become_user: root
+  remote_user: ubuntu
+  become_method: sudo 
+  become: yes
+  roles:
+    - httpd-install  
+

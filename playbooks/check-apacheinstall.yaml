@@ -1,0 +1,17 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo
+  become: yes
+  tasks:
+    - name: check apache is installed or not
+      package_facts:
+        manager: "auto"
+    - name: apache result
+      debug: 
+        #msg: "Apache found"
+         var: packages
+    - name: apache result
+      debug: 
+        msg: "apache not found"
+      when: "'httpd' not in ansible_facts.packages"       

@@ -1,0 +1,30 @@
+- name: check the MQ installed or not
+  hosts: all
+  become_user: root
+  become_method: sudo
+  become: yes
+  remote_user: ubuntu
+  tasks:
+   - name: move the script to the dbserver
+     copy:
+       src: /home/ansible/.ansible/checkingmq.sh
+       dest: /home/ubuntu/checkingmq.sh 
+       owner: root  
+         #remote_src: true    
+   - name: run the script for checking MQ installation
+     command: bash  /home/ubuntu/checkingmq.sh
+     register: mqinstall
+   - name: check the return code
+     debug:
+       msg: "return code is {{mqinstall.rc}}"
+   - name: checking using shell command
+     shell: rpm -qa|grep -v grep |grep MQSeries*
+     register: rpminstall
+   - name: check MQ is installed or not
+     when: rpminstall.rc==1
+     debug:
+       msg: "MQ is not installed"      
+   - name: display mq installed or not 
+     when: mqinstall.rc==0
+     debug:  
+       msg: "MQ is  installed"   

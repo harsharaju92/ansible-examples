@@ -1,0 +1,13 @@
+ - name: simple debug playbook
+   hosts: dbserver
+   remote_user: ubuntu
+   become_user: root
+   become_method: sudo 
+   become: yes
+   vars:
+     test1_variable: "hellow madhuri"
+   tasks:
+     - name : display the variable
+       debug:
+         var: test1_variable  
+

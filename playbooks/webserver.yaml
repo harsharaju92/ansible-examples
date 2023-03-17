@@ -1,0 +1,20 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo 
+  become: yes
+  tasks:
+    - name: install apache on webserver
+      apt:
+        name: apache2
+        state: latest
+        update_cache : yes
+    - name: make apache service is running
+      service:
+        name: apache2
+        state: started
+    - name: copy index file
+      copy: 
+        src: /home/ansible/.ansible/index.html
+        dest: /var/www/html       
+             

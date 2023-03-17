@@ -1,0 +1,25 @@
+- hosts: usservers
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo 
+  become: yes
+  tasks :
+    - name: check the server reachable or not 
+      ping :  
+    - name: check the apache is running or not
+      service:
+        name: "{{service_name}}"
+        state: started     
+    - name: copy the script file to the hosts 
+      copy:
+        src: /home/ansible/.ansible/hellowworld.sh
+        dest: /home/ubuntu
+        owner: ubuntu
+    - name: change the file system
+      file:
+        path: /home/ubuntu/hellowworld.sh
+        owner: root
+        mode: 0777      
+                
+    - name: run the python script
+      command: bash /home/ubuntu/hellowworld.sh   >>/tmp/hellow.world.txt   

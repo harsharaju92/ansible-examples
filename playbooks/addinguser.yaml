@@ -1,0 +1,15 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo
+  become: yes
+  tasks:
+    - name: adding  group to webserver
+      group:
+        name: mqbrkrs
+        state: present
+    - name: adding user to the web server
+      user:
+        name: ace
+        group: mqbrkrs
+        home: /home/ace     

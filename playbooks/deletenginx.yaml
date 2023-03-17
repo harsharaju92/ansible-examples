@@ -1,0 +1,19 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo
+  become: yes
+  vars:
+    soft_package:
+       name: nginx
+       state: absent  
+  tasks:
+    - name: remove nginx
+      apt:
+        name: "{{soft_package.name}}"
+        state: "{{soft_package.state}}"
+    - name: stop the nginx
+      service:
+        name: "{{soft_package.name}}"
+        state: stopped      
+          

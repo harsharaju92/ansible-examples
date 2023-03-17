@@ -1,0 +1,13 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo 
+  become: yes
+  tasks: 
+    - name: get hostnames
+      command: /bin/hostname
+      register: hostname
+      changed_when: false
+    - debug : var={{item}}
+      with_items:
+        - hostname.delta

@@ -1,0 +1,16 @@
+- hosts: webserver
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo 
+  become: yes
+  tasks:
+    - name: get the fact details
+      gather_facts:
+      register: get_facts
+    - debug: var={{item}}
+      with_items: 
+        - get_facts
+    - name: get date in min
+      shell: date
+      register: rangun
+    - debug: msg="{{rangun.stdout}}"        
