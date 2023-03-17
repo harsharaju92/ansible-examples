@@ -1,0 +1,8 @@
+ - name: install docker on 
+   apt:
+     name: "{{package.name}}"
+     state: "{{package.state}}" 
+ - name: start the {{package.name}} deamon
+   service:
+     name: "{{service.name}}"
+     state: "{{service.state}}"    

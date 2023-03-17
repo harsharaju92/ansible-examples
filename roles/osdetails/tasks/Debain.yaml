@@ -1,0 +1,7 @@
+ - name: check the OS details
+   debug:
+     msg="{{ ansible_distribution }}"
+ - name: check the os family
+   debug:   
+     msg="{{ ansible_os_family }}" 
+

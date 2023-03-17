@@ -1,0 +1,9 @@
+172.31.38.144
+
+[dbusserver]
+#172.31.38.144
+webserver2 ansible_host=172.31.38.144
+
+[dbusserver:vars]
+region0=Bostan
+region1=Newyork 

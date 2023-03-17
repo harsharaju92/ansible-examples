@@ -1,0 +1,7 @@
+install:
+  name: httpd
+  state: latest
+  update_cache: yes
+service:
+  name: httpd
+  state: started  

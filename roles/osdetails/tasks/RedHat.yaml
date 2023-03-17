@@ -1,0 +1,4 @@
+ - name: check the redhat os family
+   debug:
+     msg="{{ ansible_os_family }}"
+

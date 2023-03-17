@@ -1,0 +1,10 @@
+[atlanta]
+#webserver1
+172.31.37.175
+
+[bostan]
+#webserver2
+172.31.41.98  
+[bostan:vars]
+prodlist=madhuri
+#prodlist2=madhuri2

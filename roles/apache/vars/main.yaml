@@ -1,0 +1,6 @@
+apache:
+  pack_name: apache2
+  pack_state: latest
+  service_name: apache2
+  service_state: restarted  
+

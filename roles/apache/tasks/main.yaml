@@ -1,0 +1,6 @@
+- name: install apache
+  apt:
+    name: "{{apache.pack_name}}"
+    state: "{{ apache.pack_state}}"
+  notify: apache restart  
+
